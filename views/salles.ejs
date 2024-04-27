@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Salles</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 20px;
+            background-color: #fffcfc;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000000;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            text-align: left;
+            margin-bottom: 20px;
+            color: rgb(255, 0, 0);
+            
+            line-height: normal;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            border: 1px solid #000000;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+            color: #000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        strong {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn-update {
+            background-color: #ff9d00;
+            color: white;
+            border: none;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .btn-reserver {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des Salles</h1>
+
+    <h2> <a href="/salle/nouvelle" style="background-color: #ffffff; color:rgb(0, 0, 0);;">Ajouter Salle</a></h2>
+    <h3> <a href="/reservation/ca" style="background-color: #ffffff; color:rgb(0, 0, 0);;">Liste des reservation</a></h3>
+
+
+    <ul>
+        <% salles.forEach(function(salle) { %>
+            <li>
+                <strong>name:</strong> <%= salle.name %>,
+                <strong>Capacité:</strong> <%= salle.capacity %>, 
+                <strong>Équipement:</strong> <%= salle.equipment %>, 
+                <strong>Disponible:</strong> <%= salle.available ? 'Oui' : 'Non' %>
+                <button class="btn btn-reserver" onclick="reserverSalle('<%= salle._id %>')">Réserver</button>
+                <button class="btn btn-update" onclick="updateSalle('<%= salle._id %>')">Mise a jour</button>
+                <button class="btn btn-delete" onclick="deleteSalle('<%= salle._id %>')">Supprimer</button>
+              
+                
+            </li>
+        <% }); %>
+    </ul>
+
+    
+    <script>
+        function reserverSalle(id) {
+            // Rediriger vers la page de création de réservation avec l'ID de la salle
+            window.location.href = '/reservation/create/' + id;
+        }
+
+        function updateSalle(id) {
+            // Rediriger vers la page d'édition avec l'ID de la salle
+            window.location.href = '/salle/update/' + id;
+        }
+
+        function deleteSalle(id) {
+            window.location.href = '/salle/' + id;
+        }
+    </script>
+</body>
+</html>
